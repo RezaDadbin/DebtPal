@@ -1,0 +1,309 @@
+
+
+
+
+
+
+/* public/welcomeStyle.css */
+
+/* Basic Reset & Font Variables */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Helvetica Neue', Arial, sans-serif; /* Default app font */
+}
+
+/* Define CSS variables for gradients (similar to loginStyle.css) */
+:root {
+  --blue-gradient-welcome: linear-gradient(45deg, #003087, #009cde);
+  --blue-gradient-dark-welcome: linear-gradient(45deg, #66ccff, #3399ff); /* For dark mode if body.dark is ever applied */
+  --font-classy-roman: 'Georgia', 'Times New Roman', Times, serif; 
+}
+
+.welcome-page-background {
+  width: 100%;
+  height: 100vh;
+  background-image: url('images/welcome-bg.jpg'); /* YOUR IMAGE PATH */
+  background-size: cover;
+  background-position: center center; 
+  background-repeat: no-repeat;
+  display: flex;
+  position: relative;
+}
+/* Add a slight blur effect */
+.welcome-page-background::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px); /* blur the background slightly */
+  -webkit-backdrop-filter: blur(5px); /* for Safari */
+  z-index: 1;
+}
+
+/* Make content appear above the blur */
+.welcome-page-background > * {
+  position: relative;
+  z-index: 2;
+}
+
+.welcome-header-left {
+  /* width: 100%; */
+  text-align: left;
+  margin-bottom: 40px; /* MODIFIED: Space between logo and quote, adjust as needed */
+}
+
+.app-logo-welcome {
+  font-size: 3.5em; 
+  font-weight: 700; 
+  letter-spacing: -3px; 
+  background:#000000;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; 
+  display: inline-block; 
+  font-family: 'Cinzel', Arial, sans-serif; 
+}
+
+
+
+body.dark .app-logo-welcome { /* Kept your dark mode for logo */
+  background: var(--blue-gradient-dark-welcome);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 
+.sub-text-welcome {
+  font-size: 1.3em;
+  margin-bottom: 1.5rem;
+  color: #f0f0f0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  font-family: var(--font-classy-roman); 
+  line-height: 1.6;
+} */
+
+/* .proceed-button-welcome {
+  background: var(--blue-gradient-welcome); 
+  color: white;             
+  border: none;             
+  padding: 14px 30px;
+  font-size: 1.15em;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease; 
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  display: inline-block;
+  font-family: var(--font-classy-roman); 
+} */
+
+.proceed-button-welcome:hover,
+.proceed-button-welcome:focus {
+  background: #003087; 
+  color: white;      
+  transform: translateY(-2px); 
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+  outline: none;
+}
+
+/* Responsive adjustments (largely kept from your paste, with minor tweaks for new spacing) */
+@media (max-width: 1200px) { 
+  .content-column-left {
+    width: 60%;
+    padding: 40px 4% 40px 4%; /* Adjusted left padding slightly */
+  }
+  .app-logo-welcome { font-size: 3.3em; } /* Slightly adjusted for consistency */
+  .main-quote-text .quote-line-1 { font-size: 1.6em; } /* Adjusted based on your values */
+  .main-quote-text .quote-line-2 { font-size: 1.4em; } /* Adjusted based on your values */
+}
+
+@media (max-width: 992px) {
+  .content-column-left {
+    width: 70%;
+    padding: 30px 3% 30px 3%; /* Adjusted left padding slightly */
+  }
+  .app-logo-welcome { font-size: 3.2em; }
+  .main-quote-text .quote-line-1 { font-size: 1.5em; }
+  .main-quote-text .quote-line-2 { font-size: 1.3em; }
+  .sub-text-welcome { font-size: 1.2em; }
+  .proceed-button-welcome { font-size: 1.1em; }
+}
+
+@media (max-width: 768px) {
+  .welcome-page-background {
+    background-position: 70% center; /* Keep Tyrion more to the right */
+  }
+  .content-column-left {
+    width: 100%; /* Full width on mobile */
+    max-width: none;
+    padding: 20px 5%; /* Standard padding */
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+  }
+  .welcome-header-left {
+    position: relative; 
+    top: auto;
+    left: auto;
+    padding-bottom: 10px;
+    margin-bottom: 20px; /* Increased space to quote */
+    text-align: center;
+  }
+  .app-logo-welcome { font-size: 3em; }
+  .main-quote-text .quote-line-1 { font-size: 1.6em; } /* Adjusted based on your values */
+  .main-quote-text .quote-line-2 { font-size: 1.4em; } /* Adjusted based on your values */
+  .sub-text-welcome { font-size: 1.1em; margin-bottom: 1.5rem; }
+  .proceed-button-welcome { font-size: 1em; padding: 12px 25px; }
+  .welcome-quote-area, .welcome-cta-area {
+    text-align: center; 
+  }
+}
+
+@media (max-width: 480px) {
+  .app-logo-welcome { font-size: 2.5em; letter-spacing: -2px; }
+  .main-quote-text .quote-line-1 { font-size: 1.4em; } /* Adjusted based on your values */
+  .main-quote-text .quote-line-2 { font-size: 1.2em; } /* Adjusted based on your values */
+  .sub-text-welcome { font-size: 1em; }
+  .proceed-button-welcome { font-size: 0.9em; padding: 10px 20px; }
+}
+
+
+
+
+
+
+
+/* --- ADD THIS NEW CODE TO THE BOTTOM OF YOUR CSS FILE --- */
+
+/* This is the new main container for the quote and button */
+.welcome-main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.content-column-left {
+  width: 100%; /* Use full width for centering */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* This vertically centers everything */
+  align-items: center;   /* This horizontally centers everything */
+  padding: 20px;
+  box-sizing: border-box;
+  color: #fff;
+  position: relative;
+  z-index: 2;
+}
+
+.logo-box {
+  background: var(--blue-gradient-dark-main);
+  position: absolute; /* or 'fixed' if you want it to stay on scroll */
+  top: 13px;           /* distance from the top */
+  left: 23px;          /* distance from the left */
+  padding: 1px 5px;
+  border-radius: 4px;
+  backdrop-filter: blur(18px);
+  transition: transform 0.3s ease-in-out;
+}
+
+
+.logo-box:hover {
+  transform: translateY(-10px);
+}
+
+/* .quote-box {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 30px 40px;
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
+  max-width: 600px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.quote-box:hover {
+  transform: translateY(-10px);
+} */
+
+.quote-box {
+  margin-top: 150px;
+  background: rgba(0, 0, 0, 0.4); 
+  padding: 30px 40px;
+  border-radius: 100px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+  border: 0px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  max-width: 700px;
+
+  transition: transform 0.3s ease-in-out;
+}
+
+.quote-box:hover {
+  transform: translateY(-10px); 
+}
+
+/* The new quote text style */
+.quote-text {
+  
+  font-family: 'Cinzel', serif;
+  font-size: 2.2rem;
+  font-weight: 100;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  margin: 0;
+  line-height: 1;
+
+  /* --- ADD THESE TWO NEW LINES --- */
+  font-style: italic;         /* Makes the text italic */
+  letter-spacing: 1px;       /* Adds space between letters */
+  /* ----------------------------- */
+}
+
+/* The new button style */
+.proceed-button {
+  margin-top: 1px;
+  padding: 15px 30px;
+  border: 0.8px solid #001bb7; /* Gold border */
+  background: rgba(31, 33, 157, 0.29);
+  color: #ffffff; /* Gold text */
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+  font-family: 'Cinzel', serif;
+
+}
+
+.proceed-button:hover {
+  background: rgb(255, 255, 255); /* Gold background on hover */
+  color: #0020bf; /* Black text on hover */
+}
+
+.welcome-text {
+  font-size: 18px;
+  background: var(--blue-gradient-dark-main);
+  padding: 3px 11px;
+  border-radius: 5px;
+  backdrop-filter: blur(5px);
+  font-family:Georgia, 'Times New Roman', Times, serif;
+
+  color: #fff; /* or any color that shows on your background */
+  margin-top: 150px; /* space between text and button */
+
+}

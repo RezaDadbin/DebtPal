@@ -1,0 +1,321 @@
+:root {
+  --main-bg: linear-gradient(120deg, #0a0f1a 0%, #10182a 50%, #181f2f 100%);
+  --main-text: #eaf6ff;
+  --box-bg: rgba(15, 22, 34, 0.92);
+  --border-radius: 20px;
+  --blue-gradient: linear-gradient(90deg, #00eaff 0%, #6f7bfd 100%);
+  --blue-gradient-dark: linear-gradient(90deg, #66ccff, #3399ff);
+  --input-bg: rgba(18, 28, 44, 0.98);
+  --hover-bg: #224870;
+}
+/* Override variables for dark mode */
+body.dark {
+  --main-bg: #0d1a2f;
+  --main-text: #f1f1f1;
+  --box-bg: #152b48;
+  --input-bg: #0d1a2f;
+  --hover-bg: #224870;
+  --blue-gradient: linear-gradient(45deg, #66ccff, #3399ff);
+}
+
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Set general page layout and theme-based background/text color */
+body,
+html {
+  height: 100%;
+  font-family: 'Inter', Arial, sans-serif;
+  background: var(--main-bg);
+  color: var(--main-text);
+  overflow-y: auto;
+  transition: background 0.4s ease, color 0.4s ease;
+  padding: 2rem;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(ellipse at 20% 30%, #00eaff22 0%, transparent 70%),
+              radial-gradient(ellipse at 80% 70%, #6f7bfd22 0%, transparent 70%);
+  animation: bgMove 18s linear infinite alternate;
+  pointer-events: none;
+}
+@keyframes bgMove {
+  0% { background-position: 20% 30%, 80% 70%; }
+  100% { background-position: 30% 40%, 70% 60%; }
+}
+body > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Page transition styles (used for toggling between views) */
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease-in-out;
+}
+
+/* Show active page */
+.active {
+  opacity: 1 !important;
+  pointer-events: auto;
+}
+
+/* Styling for login page layout */
+.login-page {
+  padding: 10vh 2rem 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: var(--main-bg);
+}
+
+/* Container for the "DebtPal" logo */
+.logo-container {
+  margin-bottom: 3rem;
+  text-align: center;
+  width: 100%;
+  overflow: visible;
+}
+
+/* Main logo styling with gradient fill */
+.logo {
+  display: inline-block;
+  font-size: 7rem;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -5px;
+  background: var(--blue-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  padding: 0 20px;
+  position: relative;
+}
+
+/* Logo gradient in dark mode */
+body.dark .logo {
+  background: var(--blue-gradient-dark);
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+}
+
+/* Underline animation on hover */
+.logo::after {
+  content: '';
+  position: absolute;
+  width: calc(100% - 40px);
+  height: 4px;
+  background: var(--blue-gradient);
+  bottom: -10px;
+  left: 20px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.logo:hover::after {
+  transform: scaleX(1);
+}
+
+/* General container for form elements */
+.login-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Grouped label and input styling */
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  display: block;
+  color: var(--main-text);
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+
+/* Wrapper for custom underline animation */
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: var(--blue-gradient);
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+/* Animate underline on hover/focus */
+.input-wrapper:hover::after,
+.input-wrapper:focus-within::after {
+  transform: scaleX(1);
+}
+
+/* Input field styling */
+.input-group input {
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 0.95rem;
+  background: var(--input-bg);
+  color: var(--main-text);
+  transition: background 0.3s;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-bottom-color: transparent;
+}
+
+/* Primary button for login/sign-up */
+.login-btn {
+  width: 100%;
+  padding: 10px;
+  background: var(--blue-gradient);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 0.5rem;
+}
+
+/* Hover effect for login button */
+.login-btn:hover {
+  background: linear-gradient(45deg, #0085c3, #001a5e);
+  transform: translateY(-3px);
+}
+
+/* Link under login/sign-up form */
+.create-account,
+.toggle-form-link {
+  display: block;
+  margin-top: 1.5rem;
+  color: #009cde;
+  text-decoration: none;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1rem;
+  transition: color 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.create-account:hover,
+.toggle-form-link:hover {
+  color: #003087;
+  transform: translateY(-2px);
+}
+
+/* Eye icon for password visibility toggle */
+.password-toggle {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #777;
+  font-size: 1.2rem;
+  user-select: none;
+}
+
+/* Placeholder next page style */
+.next-page {
+  background-color: var(--main-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--main-text);
+}
+
+/* Sign-up form hidden by default, shown with .active */
+.signup-form {
+  display: none;
+  width: 100%;
+  max-width: 400px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.signup-form.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Used for toggling visibility of login container */
+.login-container.hidden {
+  display: none;
+  opacity: 0;
+}
+
+/* Container for both login and sign-up forms */
+.form-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Fade out effect on page change */
+body.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Wraps all form and logo content */
+.login-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  transform-origin: top center;
+  padding: 2vh 1vw;
+}
+
+/* Responsive scale adjustments for screen height */
+@media (min-height: 700px) {
+  .login-content-wrapper {
+    transform: scale(1);
+  }
+}
+
+@media (max-height: 699px) and (min-height: 600px) {
+  .login-content-wrapper {
+    transform: scale(0.9);
+  }
+}
+
+@media (max-height: 599px) {
+  .login-content-wrapper {
+    transform: scale(0.9);
+  }
+}
+

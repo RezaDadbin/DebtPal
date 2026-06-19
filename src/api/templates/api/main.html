@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content="{{ csrf_token }}" />
+  <meta name="theme-color" content="#10182a"> <title>DebtPal Main Page</title>
+  <title>DebtPal Main Page</title>
+  <link rel="stylesheet" href="{% static 'api/mainStyle.css' %}">
+  </head>
+<body>
+
+  <div class="top-buttons">
+    <button id="sidebarButton" class="top-button left-top-button">☰</button>
+    <button id="addButton" class="top-button left-top-button">＋</button>
+  </div>
+
+  <div class="profile-menu">
+    <button id="profileButton" class="top-button" aria-label="Profile">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <circle cx="11" cy="7" r="4" stroke="#00eaff" stroke-width="2"/>
+        <ellipse cx="11" cy="16" rx="6" ry="4" stroke="#00eaff" stroke-width="2"/>
+      </svg>
+    </button>
+  </div>
+
+  <div id="profileSidebar" class="profile-sidebar">
+    <div class="profile-sidebar-content-wrapper">
+      <div class="profile-top">
+        <button id="profileButtonInside" class="top-button">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <circle cx="11" cy="7" r="4" stroke="#00eaff" stroke-width="2"/>
+            <ellipse cx="11" cy="16" rx="6" ry="4" stroke="#00eaff" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
+      <div class="profile-options">
+        {% comment %} <button id="themeToggleBtn" class="dropdown-item">
+          <span id="themeIcon">🌙</span> Theme
+        </button> {% endcomment %}
+        <button id="transactionsButton" class="dropdown-item">Transactions</button>
+        <button id="settingsButton" class="dropdown-item">Settings</button>
+        <button id="logoutButton" class="dropdown-item">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-content-wrapper">
+      <div class="sidebar-header">
+        <button id="sidebarToggleInside" class="sidebar-toggle-btn">☰</button>
+        <button id="searchToggleBtn" class="sidebar-btn">🔍</button>
+        <button id="addButtonInside" class="add-button">＋</button>
+      </div>
+      <div class="logo-big">DebtPal</div> <div id="searchBoxContainer" class="search-box-container hidden">
+        <input type="text" id="searchInput" placeholder="Search...">
+      </div>
+      <div class="sidebar-inner">
+      </div>
+    </div>
+  </div>
+
+  <div id="blurOverlay" class="blur-overlay hidden"></div>
+
+  <div class="accounting-container">
+    
+    <div class="main-content-app-logo-container">
+      <h1 class="logo app-content-brand-logo">debtpal</h1>
+    </div>
+  
+    <p id="accountingTitle" class="accounting-title big">Let's create an Accounting form and organize our debts.</p>
+    <button id="newAccountingBtn" class="new-accounting-btn big">Create New Accounting</button>
+
+    <div id="accountingBox" class="accounting-box hidden">
+      <div id="accountingNameContainer" class="accounting-name-container">
+        <div id="accountingNameDisplay" class="accounting-name">
+          <input type="text" id="accountingNameInput" placeholder="Enter Accounting Name" />
+          <span id="accountingNameText" style="display: none;"></span>
+        </div>
+      </div>
+      <div class="accounting-topbar">
+        <div id="savedDebtsRow" class="saved-debts-row"></div>
+      </div>
+      <div class="accounting-form">
+        <div class="form-row title-amount-row">
+          <input type="text" id="debtTitleInput" placeholder="Debt Title" />
+          <input type="number" id="amountInput" placeholder="Total Amount" min="0" step="any" />
+        </div>
+        <div class="form-row">
+          <label style="width:100%; text-align:left; margin-bottom: 5px;">Payers (Who paid for this item?):</label>
+          <div class="dynamic-list" id="payersList">
+            <div class="payer-entry">
+              <input type="text" class="payer-name-input" placeholder="Payer 1 Name" />
+              <input type="number" class="payer-amount-input" placeholder="Paid Amount" min="0" step="any" />
+            </div>
+          </div>
+          <div class="list-controls">
+            <button type="button" id="addPayerBtn" class="small-add-btn">+</button>
+            <button type="button" id="removePayerBtn" class="small-add-btn">−</button>
+          </div>
+        </div>
+        <div class="form-row">
+          <p id="personsInvolvedLabel" class="form-text-label" style="width:100%; text-align:left; margin-bottom: 5px;">People involved in <span id="debtNameForPersonsLabelSpan">this</span> debt (Who shares this cost?):</p>
+        </div>
+        <div class="form-row">
+          <div class="dynamic-list" id="personsList">
+            <input type="text" placeholder="Person 1" />
+          </div>
+          <div class="list-controls">
+            <button type="button" id="addPersonBtn" class="small-add-btn">+</button>
+            <button type="button" id="removePersonBtn" class="small-add-btn">−</button>
+          </div>
+        </div>
+        <div class="form-row">
+          <textarea id="commentInput" placeholder="Comment for this debt item" maxlength="100"></textarea>
+        </div>
+        <button id="saveBtn" class="save-btn">Save Debt Item</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="debtDetailsModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close-btn" id="modalCloseBtn">&times;</span>
+      <h2 id="modalDebtTitle">Debt Title</h2>
+      <div class="modal-section">
+        <strong>Accounting Name:</strong> <span id="modalAccountingName"></span>
+      </div>
+      <div class="modal-section">
+        <strong>Total Amount:</strong> <span id="modalTotalAmount"></span>
+      </div>
+      <div class="modal-section">
+        <strong>Payers:</strong>
+        <ul id="modalPayersList"></ul>
+      </div>
+      <div class="modal-section" id="modalInvolvedPeopleSection">
+        <strong>People Involved:</strong>
+        <ul id="modalInvolvedPeopleList"></ul>
+      </div>
+      <div class="modal-section" id="modalCommentSection">
+        <strong>Comment:</strong> <span id="modalComment"></span>
+      </div>
+      <div class="modal-section" id="modalTimestampSection">
+        <strong>Saved on:</strong> <span id="modalTimestamp"></span>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'api/csrf.js' %}"></script>
+  <script src="{% static 'api/mainBack.js' %}"></script>
+</body>
+</html>

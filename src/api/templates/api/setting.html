@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content="{{ csrf_token }}" />
+  <title>DebtPal | Settings</title>
+  <link rel="stylesheet" href="{% static 'api/settingStyle.css' %}" />
+  </head>
+<body> <div class="settings-page-container">
+    <header class="settings-header">
+      <a href="{% url 'dashboard-page' %}" class="back-to-dashboard-btn">&larr; Back to Dashboard</a>
+      <h1 class="settings-main-title">Settings</h1>
+    </header>
+
+    <div class="settings-grid">
+      <section class="settings-box account-details-settings">
+        <h2>Account Details</h2>
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" class="input-field" value="{{ user.username|capfirst }}" readonly>
+        </div>
+        <div class="input-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" class="input-field" value="{{ user.email }}" readonly>
+        </div>
+      </section>
+
+      <section class="settings-box password-settings">
+        <h2>Reset Password</h2>
+        <form id="resetPasswordForm">
+          <div class="input-group">
+            <label for="currentPassword">Current Password</label>
+            <input type="password" id="currentPassword" class="input-field" required>
+            <span class="error-message" id="currentPasswordError"></span>
+          </div>
+          <div class="input-group">
+            <label for="newPassword">New Password</label>
+            <input type="password" id="newPassword" class="input-field" required>
+            <span class="error-message" id="newPasswordError"></span>
+          </div>
+          <div class="input-group">
+            <label for="repeatNewPassword">Repeat New Password</label>
+            <input type="password" id="repeatNewPassword" class="input-field" required>
+            <span class="error-message" id="repeatNewPasswordError"></span>
+          </div>
+          <button type="submit" id="changePasswordBtn" class="button primary-button">Change Password</button>
+          <div class="message-area" id="passwordChangeMessage"></div>
+        </form>
+      </section>
+    </div> <section class="settings-box privacy-data-settings">
+      <h2>Privacy & Data</h2>
+      
+      <div class="privacy-subsection">
+        <h3>Data Management</h3>
+        <button id="exportDataBtn" class="button secondary-button">Export My Data</button>
+        <button id="clearCacheBtn" class="button secondary-button">Clear Local Cache</button>
+        <div class="message-area" id="dataManagementMessage"></div>
+      </div>
+
+      <div class="privacy-subsection account-danger-zone">
+        <h3>Account Management</h3>
+        <button id="deleteAccountBtn" class="button danger-button">Delete Account</button>
+        <div class="message-area" id="deleteAccountMessage"></div>
+      </div>
+    </section>
+
+  </div> <script src="{% static 'api/csrf.js' %}"></script>
+  <script src="{% static 'api/settingBack.js' %}"></script>
+  <script src="{% static 'api/themeToggle.js' %}" defer></script> </body>
+</html>

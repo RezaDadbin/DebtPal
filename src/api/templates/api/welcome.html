@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DebtPal | Welcome!</title>
+  <link rel="stylesheet" href="{% static 'api/welcomeStyle.css' %}" />
+  </head>
+<body>
+  <div class="welcome-page-background"> <div class="content-column-left">
+      <header class="welcome-header-left">
+        <div class="logo-box">
+          <div class="app-logo-welcome">debtpal</div>
+        </div>
+      </header>
+
+      <main class="welcome-main-content">
+        <div class="quote-box">
+          <p class="quote-text">“A Lannister always pays his debts.”</p>
+        </div>
+        <p class="welcome-text">Welcome to debtpal my Lord! here we can exactly remember our debts.</p>
+        <a href="{% url 'dashboard-page' %}" id="organizeDebtsBtn" class="proceed-button">Let’s organize our debts</a>
+      </main>
+
+      
+    </div>
+  </div>
+
+  <script src="{% static 'api/welcomeBack.js' %}"></script>
+</body>
+</html>
