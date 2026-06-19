@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <meta name="theme-color" content="#10182a">
+    <title>DebtPal | Transactions</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{% static 'api/transactionsStyle.css' %}">
+</head>
+<body>
+
+    <div class="transactions-container">
+        <header class="transactions-header">
+            <h1>Transactions Dashboard</h1>
+            <a href="{% url 'dashboard-page' %}" class="back-link">Back to Main</a>
+        </header>
+
+        <div class="transactions-body">
+            <nav class="accountings-sidebar">
+                <h2>My Accountings</h2>
+                <ul id="accountingsList">
+                    <li>Loading...</li>
+                </ul>
+            </nav>
+
+            <main class="details-content">
+                <section id="detailsPlaceholder" class="placeholder">
+                    <p>Select an accounting from the list to see the details.</p>
+                </section>
+
+                <section id="detailsView" class="hidden">
+                    <h2 id="selectedAccountingName"></h2>
+
+                    <div class="total-box">
+                        <h3>Final Balances</h3>
+                        <ul id="finalBalancesList">
+                            </ul>
+                    </div>
+
+                    <h3>Settlement Plan (Who Pays Whom)</h3>
+                    <div id="settlementPlan">
+                        </div>
+
+                    <h3>Debt Involvement Chart</h3>
+                    <div class="chart-container">
+                        <canvas id="debtChart"></canvas>
+                    </div>
+                    <section class="debt-items-list">
+                        <h3>Debt Items in This Accounting</h3>
+                        <div id="debtItemsContainer">
+                            </div>
+                    </section>
+
+                    <div class="danger-zone">
+                        <h3>Account Management</h3>
+                        <button id="deleteAccountingBtn" class="danger-button">Delete This Accounting</button>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="{% static 'api/csrf.js' %}"></script>
+    <script src="{% static 'api/transactionsBack.js' %}"></script>
+</body>
+</html>

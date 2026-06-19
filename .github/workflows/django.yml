@@ -1,0 +1,48 @@
+name: Django
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Django checks
+        run: python src/manage.py check
+
+      - name: Run tests
+        run: python src/manage.py test api
+
+      - name: Check production settings
+        env:
+          DJANGO_SETTINGS_MODULE: debtpal_project.settings.prod
+          SECRET_KEY: prod-check-secret-key-with-more-than-fifty-characters-1234567890
+          ALLOWED_HOSTS: example.com
+          CSRF_TRUSTED_ORIGINS: https://example.com
+          SECURE_SSL_REDIRECT: "true"
+          SECURE_HSTS_SECONDS: "31536000"
+          SECURE_HSTS_INCLUDE_SUBDOMAINS: "true"
+          SECURE_HSTS_PRELOAD: "true"
+        run: python src/manage.py check --deploy
+
+      - name: Check production static files
+        env:
+          DJANGO_SETTINGS_MODULE: debtpal_project.settings.prod
+          SECRET_KEY: prod-check-secret-key-with-more-than-fifty-characters-1234567890
+          ALLOWED_HOSTS: example.com
+        run: python src/manage.py collectstatic --dry-run --noinput

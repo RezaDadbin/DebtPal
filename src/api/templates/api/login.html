@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content="{{ csrf_token }}" />
+  <title>DebtPal | Login</title>
+  <link rel="stylesheet" href="{% static 'api/loginStyle.css' %}" />
+</head>
+
+<body>
+
+  <div class="page login-page active" id="loginPage">
+    <div class="login-content-wrapper">
+      <div class="logo-container">
+        <h1 class="logo">debtpal</h1>
+      </div>
+
+      <div class="form-container login-form active">
+        <div class="input-group">
+          <label for="email">Email</label>
+          <div class="input-wrapper">
+            <input type="email" id="email" placeholder="Enter your email" required>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <input type="password" id="password" placeholder="Enter your password" required>
+          </div>
+        </div>
+
+        <div id="loginFormMessages" class="form-messages" style="margin-bottom: 1rem; color: red; text-align: center;"></div>
+        <button class="login-btn" id="loginBtn">Log In</button>
+
+        <a href="{% url 'signup-page' %}" class="create-account">Create an account</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page next-page" id="nextPage">
+    <p>Welcome to the blank page 🎉</p>
+  </div>
+
+  <script src="{% static 'api/csrf.js' %}"></script>
+  <script src="{% static 'api/loginBack.js' %}"></script>
+</body>
+
+</html>

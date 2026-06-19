@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content="{{ csrf_token }}" />
+  <title>DebtPal | Sign Up</title>
+  <link rel="stylesheet" href="{% static 'api/loginStyle.css' %}" />
+  <style>
+    .error-message {
+      display: none;
+      color: red;
+      font-size: 0.85em;
+      margin-top: 4px;
+    }
+    .form-messages {
+      margin-bottom: 1rem;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page login-page active" id="signupPage">
+    <div class="login-content-wrapper">
+      <div class="logo-container">
+        <h1 class="logo">debtpal</h1>
+      </div>
+
+      <div class="form-container signup-form active">
+        <div id="formMessages" class="form-messages"></div>
+
+        <div class="input-group">
+          <label for="username">Username</label>
+          <div class="input-wrapper">
+            <input type="text" id="username" placeholder="Choose a username" required>
+          </div>
+          <span class="error-message" id="usernameError"></span>
+        </div>
+
+        <div class="input-group">
+          <label for="new-email">Email</label>
+          <div class="input-wrapper">
+            <input type="email" id="new-email" placeholder="Enter your email" required>
+          </div>
+          <span class="error-message" id="emailError"></span>
+        </div>
+
+        <div class="input-group">
+          <label for="new-password">Password</label>
+          <div class="input-wrapper">
+            <input type="password" id="new-password" placeholder="Create a password" required>
+          </div>
+          <span class="error-message" id="passwordError"></span>
+        </div>
+
+        <div class="input-group">
+          <label for="repeat-password">Repeat Password</label>
+          <div class="input-wrapper">
+            <input type="password" id="repeat-password" placeholder="Repeat your password" required>
+          </div>
+          <span class="error-message" id="repeatPasswordError"></span>
+        </div>
+
+        <button class="login-btn" id="signupBtn">Sign Up</button>
+
+        <a href="{% url 'login-page' %}" class="toggle-form-link back-to-login">Already have an account?</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'api/csrf.js' %}"></script>
+  <script src="{% static 'api/signupBack.js' %}"></script>
+</body>
+</html>
