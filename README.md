@@ -4,6 +4,14 @@ DebtPal is a small Django project for tracking shared debts. It lets a user crea
 
 This is a student project, so the focus is on keeping the code understandable and easy to run locally rather than presenting it as a production finance product.
 
+## What This Demonstrates
+
+- A Django application with separated development and production settings
+- Template-based frontend pages backed by JSON endpoints
+- Basic authentication, account ownership, and protected views
+- Settlement logic for splitting shared expenses
+- GitHub-ready project structure with tests, CI, Docker, and deployment notes
+
 ## Features
 
 - Email or username based login
